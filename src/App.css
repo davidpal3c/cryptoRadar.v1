@@ -37,8 +37,8 @@ a:hover{
     padding: 20px;
 }
 .nav-container{
-    position: absolute;
-    /* position: relative; */
+    /* position: absolute; */
+    position: relative;
     left: 0;
     margin: 10px;
     height: 100vh;
