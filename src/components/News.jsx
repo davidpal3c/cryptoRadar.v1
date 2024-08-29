@@ -11,16 +11,19 @@ const demoImage = 'http://coinrevolution.com/wp-content/uploads/2020/06/cryptone
 
 
 const News = ({ simplified }) => {
-  const { data: cryptoNews, isLoading } = useGetCryptoNewsQuery({ newsCategory: 'Cryptocurrency', count: simplified ? 6 : 12})
+  const { data: cryptoNews, isLoading } = useGetCryptoNewsQuery({ newsCategory: 'Cryptocurrency' })
 
   console.log(cryptoNews)
 
   if (isLoading) return 'Loading...';
   if (!cryptoNews?.data) return 'No data available';
 
+  const newsToDisplay = simplified ? cryptoNews.data.slice(0, 6) : cryptoNews.data;
+
+  
   return (
     <Row gutter={[24, 24]}>
-      {cryptoNews.data.map((news, i) => (
+      {newsToDisplay.map((news, i) => (
         <Col xs={24} sm={12} lg={8} key={i}>
           <Card hoverable className="news-card">
             <a href={news.url} target="_blank" rel="noreferrer">
@@ -34,7 +37,7 @@ const News = ({ simplified }) => {
                   <Avatar src={news.source.favicon || demoImage} alt="news" id="news-provider-img"/>
                   <Text className="provider-name">{news.source.name}</Text>
                 </div>
-                <Text>{moment(news.date).startOf('ss').fromNow()}</Text>
+                <Text >{moment(news.date).startOf('ss').fromNow()}</Text>
               </div>
             </a> 
           </Card>

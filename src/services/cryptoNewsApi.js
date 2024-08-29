@@ -23,7 +23,7 @@ export const cryptoNewsApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl }),
     endpoints: (builder) => ({
         getCryptoNews: builder.query({
-            query: ({ newsCategory, count }) => createRequest(`/v1/search?q=${newsCategory}&country=uk&language=en`),
+            query: ({ newsCategory }) => createRequest(`/v1/search?q=${newsCategory}&country=uk&language=en`),
         })
     })
 });
