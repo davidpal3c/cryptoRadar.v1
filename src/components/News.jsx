@@ -1,8 +1,12 @@
-import React from 'react'
+// 
+
+
+import React, { useState } from 'react'
 import { Select, Typography, Row, Avatar, Card, Col } from 'antd';
 import moment from 'moment';
  
 import { useGetCryptoNewsQuery } from '../services/cryptoNewsApi';
+import { useGetCryptosQuery } from '../services/cryptoApi';
 
 const { Text, Title } = Typography;
 const { Option } = Select;
@@ -11,18 +15,35 @@ const demoImage = 'http://coinrevolution.com/wp-content/uploads/2020/06/cryptone
 
 
 const News = ({ simplified }) => {
-  const { data: cryptoNews, isLoading } = useGetCryptoNewsQuery({ newsCategory: 'Cryptocurrency' })
+  const [newsCategory, setNewsCategory] = useState('Cryptocurrency')
+  const { data: cryptoNews } = useGetCryptoNewsQuery({ newsCategory, count: simplified ? 6 : 12})
+  const { data } = useGetCryptosQuery(100);
 
-  console.log(cryptoNews)
+  // console.log(cryptoNews)
 
-  if (isLoading) return 'Loading...';
-  if (!cryptoNews?.data) return 'No data available';
+  // if (isLoading) return 'Loading...';
+  if (!cryptoNews?.data) return 'Loading ...  ';
 
   const newsToDisplay = simplified ? cryptoNews.data.slice(0, 6) : cryptoNews.data;
 
   
   return (
     <Row gutter={[24, 24]}>
+      {!simplified && (
+        <Col span={24}>
+          <Select
+            showSearch
+            className="Select a Crypto"
+            optionFilterProp="children"
+            onChange={(value) => setNewsCategory(value)}
+            filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+            style={{ width: '30%'}}
+          >
+            <Option value="Cryptocurrency">Cryptocurrency</Option>
+            {data?.data?.coins.map((coin) => <Option value={coin.name}>{coin.name}</Option>)}
+            </Select>
+        </Col>
+      )}
       {newsToDisplay.map((news, i) => (
         <Col xs={24} sm={12} lg={8} key={i}>
           <Card hoverable className="news-card">
