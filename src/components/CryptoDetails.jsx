@@ -6,7 +6,8 @@ import { Col, Row, Typography, Select } from 'antd';
 import { MoneyCollectOutlined, DollarCircleOutlined, FundOutlined, ExclamationCircleOutlined, 
   StopOutlined, TrophyOutlined, NumberOutlined, ThunderboltOutlined, CheckOutlined } from '@ant-design/icons';
 
-import { useGetCryptoDetailsQuery } from '../services/cryptoApi';
+import { useGetCryptoDetailsQuery, useGetCryptoHistoryQuery } from '../services/cryptoApi';
+import LineChart from './LineChart';
 
 const { Title, Text } = Typography;
 const { Option, } = Select;
@@ -16,9 +17,15 @@ const CryptoDetails = () => {
                               // useParams allows to use segment of url (id) and asign to variable
   const [timePeriod, setTimePeriod] = useState('7d')
   const { data, isFetching } = useGetCryptoDetailsQuery(coinId)
+  const { data: coinHistory } = useGetCryptoHistoryQuery({coinId, timePeriod})
   const cryptoDetails = data?.data?.coin; 
 
+  console.log(coinHistory);
   console.log(data);
+
+
+  if(isFetching) return 'Loading...';
+
 
   const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
 
@@ -60,7 +67,11 @@ const CryptoDetails = () => {
         {time.map((date) => <Option key={date}>{date}</Option>)}
       </Select>
 
-      {/* lne chart  */}
+      <LineChart 
+        coinHistory={coinHistory} 
+        currentPrice={millify(cryptoDetails?.price)} 
+        coinName={cryptoDetails?.name}
+      />
 
       <Col className="stats-container">
         <Col className="coin-value-statistics">
@@ -69,7 +80,7 @@ const CryptoDetails = () => {
               {cryptoDetails.name} Value Statistics
             </Title>
             <p>
-              An overview showing the stats of {cryptoDetails.name}
+              An overview showing the stats of {cryptoDetails.name}, such as the base and quote currency, the rank, and trading volume.
             </p>
           </Col>
           {stats.map(({ icon, title, value }) => (
@@ -104,9 +115,12 @@ const CryptoDetails = () => {
       </Col>
       <Col className="coin-desc-link">
           <Row className="coin-desc">
-            <Title level={3} className="coin-details-heading">
-                What is {cryptoDetails.name}
-                {HTMLReactParser(cryptoDetails.description)}
+            <Title level={4} className="coin-details-heading">
+                What is {cryptoDetails.name}?
+                <br></br>
+                <br></br>
+                <p>{HTMLReactParser(cryptoDetails.description)}</p>
+                
             </Title>
           </Row>
           <Col className="coin-links">
