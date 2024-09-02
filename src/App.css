@@ -204,6 +204,7 @@ a:hover{
     font-size: 1rem;
 }
 
+
 .stats{
     font-weight: 800;
 }
@@ -212,6 +213,10 @@ a:hover{
     font-size: 1rem;
     opacity: 0.9;
 }
+/* 
+.coin-value-statistics-heading:hover {
+    background-color: var(--bgPrimary);
+} */
 
 .coin-desc-link{
     display: flex;
