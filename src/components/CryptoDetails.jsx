@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import HTMLReactParser from 'html-react-parser/lib/index';
 import { useParams } from 'react-router-dom';
 import millify from 'millify';
@@ -15,14 +15,24 @@ const { Option, } = Select;
 const CryptoDetails = () => {
   const { coinId } = useParams();
                               // useParams allows to use segment of url (id) and asign to variable
-  const [timePeriod, setTimePeriod] = useState('7d')
-  const { data, isFetching } = useGetCryptoDetailsQuery(coinId)
-  const { data: coinHistory } = useGetCryptoHistoryQuery({coinId, timePeriod})
+  const [timePeriod, setTimePeriod] = useState('7d');
+  const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
+  const { data: coinHistory, refetch } = useGetCryptoHistoryQuery({coinId, timePeriod});
   const cryptoDetails = data?.data?.coin; 
 
-  console.log(coinHistory);
-  console.log(data);
+  console.log('initial coin history data:', coinHistory);
+  console.log('initial data', data);
 
+
+  useEffect(() => {
+    console.log(`time period changed to ${timePeriod}`);
+    refetch();
+  }, [timePeriod, refetch]);
+
+  
+  useEffect(() => {
+    console.log('Updated coinHistory:', coinHistory);
+  }, [coinHistory]);
 
   if(isFetching) return 'Loading...';
 
@@ -46,7 +56,12 @@ const CryptoDetails = () => {
   ];
 
   // console.log(data);
+  const formattedCoinHistory = coinHistory?.data?.history.map((item) => ({
+    price: item.price,
+    timestamp: new Date(item.timestamp * 1000).toLocaleDateString(), // Convert timestamp to readable date
+  }));
 
+  
   return (
     <Col className="coin-detail-container">
       <Col className="coin-heading-container">

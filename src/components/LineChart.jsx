@@ -12,38 +12,42 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
     const coinPrice = [];
     const coinTimestamp = [];
 
-    // for (let i = 0; i < coinHistory?.data?.history?.length; i++) {
-    //     coinPrice.push(coinHistory.data.history[i].price);
-    //     coinTimestamp.push(new Date(coinHistory.data.history[i].timestamp).toLocaleDateString());
-    // }
 
     for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
         coinPrice.push(coinHistory?.data?.history[i].price);
+        coinTimestamp.push(new Date(coinHistory?.data?.history[i].timestamp*1000).toLocaleDateString());
     }
+    
 
-    for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
-        coinTimestamp.push(new Date(coinHistory?.data?.history[i].timestamp).toLocaleDateString());
-    }
-
+    console.log('updated coin history data:',coinHistory)
     // Data object for ChartJS
     const data = {
         labels: coinTimestamp,
         datasets: [
             {
-                label: "Price in USD",
+                label: `Price of ${coinName} in USD`,
                 data: coinPrice,
                 fill: false,
                 backgroundColor: "#0071bd",
                 borderColor: "#0071bd",
                 borderWidth: 2, // Set border width for the line
-                pointRadius: 3, // Show points on the line
-                tension: 0.4,
+                pointRadius: 2.5, // Show points on the line
+                tension: 0.2,
             },
         ],
     };
 
     // Updated options object for ChartJS v4
     const options = {
+        scales: {
+            y: {
+                beginAtZero: false,
+            },
+            x: {
+                type: 'category',
+                labels: coinTimestamp,
+            },
+        },
         responsive: true,
         plugins: {
             legend: {
@@ -52,15 +56,6 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
             title: {
                 display: true,
                 text: `${coinName} Price Chart`,
-            },
-        },
-        scales: {
-            y: {
-                beginAtZero: false,
-            },
-            x: {
-                type: 'category',
-                labels: coinTimestamp,
             },
         }
     };
