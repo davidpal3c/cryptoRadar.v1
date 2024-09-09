@@ -11,12 +11,20 @@
 
 :root{
     /* --text-primary:#111123; */
-    --text-primary: #372554;
+    /* --text-primary: #372554;
     --bgPrimary:#F5F5F5;
    --bgSecondary: #F3A0A1;
    --blueish: #2C8C99;
    --light-blue: #6B4F6D ;
-   --border: #E1C2B3;
+   --border: #E1C2B3; */
+
+   --text-primary: #18314F;
+   --text-secondary: #0D0630;
+   --bgPrimary:#F5F5F5;
+  --bgSecondary: #8BBEB2;
+  --blueish: #384E77;
+  --yellowish: #f9c5ae ;
+  --border: #ff976b;   
 }
 
 * {
@@ -25,8 +33,9 @@
     box-sizing: border-box;
 }
 
+
 a:hover{
-    color: var(--light-blue) !important;
+    color: var(--bgSecondary) !important;
 }
 
 
@@ -185,7 +194,7 @@ a:hover{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--bgSecondary);
     padding-top: 20px;
     padding-bottom: 20px;
     gap: 10px;
@@ -225,7 +234,7 @@ a:hover{
 .coin-stats{
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--bgSecondary);
     font-size: 1rem;
     opacity: 0.9;
     padding: 20px;
@@ -290,7 +299,7 @@ a:hover{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--bgSecondary);
     padding: 20px;
 }
 
@@ -306,7 +315,7 @@ a:hover{
 }
 
 .coin-link:hover, .coin-stats:hover{
-    background-color: var(--bgSecondary);
+    background-color: var(--yellowish);
 }
 
 @media screen and (max-width:1000px){
@@ -386,7 +395,7 @@ width: 70%;
 }
 
 .news-card p{
-    color: var(--text-primary);
+    color: var(--blueish);
     margin: 10px 0px !important;
 }
 
@@ -413,6 +422,11 @@ width: 70%;
     align-items: center !important;
     flex-wrap: wrap !important;
 }
+
+.price-container h5 { 
+    color: var(--text-primary);
+}
+
 .price-change{
     font-weight: 900 !important;
 }
@@ -427,10 +441,15 @@ width: 70%;
     margin-top: 40px;
 }
 
+
 .home-heading-container h3,
 .home-heading-container a {
     color: var(--blueish);
 }
+
+
+
+
 
 .show-more{
     margin-top: 0px !important;
@@ -472,7 +491,7 @@ width: 70%;
 }
 
 .footer h5 {
-    color: var(--light-blue);
+    color: var(--text-primary);
 }
 
 .footer a {

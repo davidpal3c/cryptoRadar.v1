@@ -50,7 +50,7 @@ const News = ({ simplified }) => {
           <Card hoverable className="news-card">
             <a href={news.url} target="_blank" rel="noreferrer">
               <div className="news-image-container">
-                <Title className="news-title" level={5}>{news.title?.length > 50 ? `${news.title.substring(0, 50)}...` : news.title}</Title>
+                <Title className="news-title" style={{ color: "#18314F"}} level={5}>{news.title?.length > 50 ? `${news.title.substring(0, 50)}...` : news.title}</Title>
                 <img src={news.thumbnail || demoImage } alt="news" className="news-image"/>
               </div>
               <p>{news.title?.length > 100 ? `${news.title.substring(0, 100)}...` : news.title}</p>

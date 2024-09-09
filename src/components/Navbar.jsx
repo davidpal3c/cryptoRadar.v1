@@ -3,7 +3,7 @@ import { Button, Menu, Typography, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined, MoneyCollectOutlined, BulbOutlined, FundOutlined, MenuOutlined } from '@ant-design/icons';
 
-import icon from '../images/logo-svg.svg';
+import icon from '../images/logo-dark.png';
 
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(true);
@@ -40,7 +40,7 @@ const Navbar = () => {
         </div>
         {activeMenu && (
           <Menu theme="light" style={{ 
-            border: "1px solid #E1C2B3", 
+            border: "1px solid #8BBEB2", 
             borderRadius: "0.5rem" }}>
             <Menu.Item icon={ <HomeOutlined />}>
               <Link to="/">Home</Link>
