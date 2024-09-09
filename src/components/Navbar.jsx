@@ -3,7 +3,7 @@ import { Button, Menu, Typography, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 import { HomeOutlined, MoneyCollectOutlined, BulbOutlined, FundOutlined, MenuOutlined } from '@ant-design/icons';
 
-import icon from '../images/logo.png';
+import icon from '../images/logo-svg.svg';
 
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(true);
@@ -30,7 +30,7 @@ const Navbar = () => {
   return (
     <div className="nav-container">
         <div className="logo-container">
-          <Avatar src={icon} size="large"/>
+          <Avatar src={icon} size="large" className="logoImage"/>
           <Typography.Title level={2} className="logo">
               <Link to="/">CryptoRadar</Link>
           </Typography.Title>
@@ -39,7 +39,9 @@ const Navbar = () => {
           </Button>
         </div>
         {activeMenu && (
-          <Menu theme='dark'>
+          <Menu theme="light" style={{ 
+            border: "1px solid #E1C2B3", 
+            borderRadius: "0.5rem" }}>
             <Menu.Item icon={ <HomeOutlined />}>
               <Link to="/">Home</Link>
             </Menu.Item>
