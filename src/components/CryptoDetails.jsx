@@ -10,7 +10,6 @@ import { useGetCryptoDetailsQuery, useGetCryptoHistoryQuery } from '../services/
 import Loader from './Loader';
 import LineChart from './LineChart';
 
-
 const { Title, Text } = Typography;
 const { Option } = Select;
 
@@ -18,12 +17,11 @@ const CryptoDetails = () => {
   const { coinId } = useParams();
   const [timePeriod, setTimePeriod] = useState('7d');
   const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
-  const { data: coinHistory } = useGetCryptoHistoryQuery({ coinId, timePeriod });
-  
-  console.log("Coin history", coinHistory);
-  console.log('Selected time period:', timePeriod);
-  console.log('Fetched coin history:', coinHistory);
+  const { data: coinHistory, refetch } = useGetCryptoHistoryQuery({ coinId, timePeriod });
 
+  useEffect(() => {
+    refetch();
+  }, [timePeriod, refetch]);
 
   const cryptoDetails = data?.data?.coin;
 
@@ -46,6 +44,9 @@ const CryptoDetails = () => {
     { title: 'Total Supply', value: `$ ${cryptoDetails?.supply?.total && millify(cryptoDetails?.supply?.total)}`, icon: <ExclamationCircleOutlined /> },
     { title: 'Circulating Supply', value: `$ ${cryptoDetails?.supply?.circulating && millify(cryptoDetails?.supply?.circulating)}`, icon: <ExclamationCircleOutlined /> },
   ];
+
+  console.log('Time Period:', timePeriod);
+  console.log('Coin History:', coinHistory);
 
   return (
     <Col className="coin-detail-container">
@@ -71,7 +72,6 @@ const CryptoDetails = () => {
         coinHistory={coinHistory} 
         currentPrice={millify(cryptoDetails?.price)} 
         coinName={cryptoDetails?.name}
-        // timePeriod={timePeriod} 
       />
 
       <Col className="stats-container">
