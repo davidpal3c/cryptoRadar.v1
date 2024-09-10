@@ -1,70 +1,133 @@
-# Getting Started with Create React App
+# CryptoRadar
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+CryptoRadar is a React-based web application that provides real-time information about cryptocurrencies, including their prices, market caps, and daily changes. It also features the latest news related to cryptocurrencies. The application leverages Redux Toolkit for state management and data fetching, and Ant Design for UI components.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Responsive Navbar**: A responsive navigation bar that adapts to different screen sizes.
+- **Cryptocurrency Listing**: Displays a list of cryptocurrencies with their prices, market caps, and daily changes.
+- **Search Functionality**: Allows users to search for specific cryptocurrencies.
+- **Cryptocurrency Details**: Provides detailed information about a selected cryptocurrency.
+- **Historical Data**: Displays historical data of a cryptocurrency in a line chart.
+- **Latest News**: Shows the latest news related to cryptocurrencies.
+- **Dynamic Data Fetching**: Uses Redux Toolkit Query to fetch data from APIs.
 
-### `npm start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **React**: A JavaScript library for building user interfaces.
+- **Redux Toolkit**: A library for efficient Redux development.
+- **Redux Toolkit Query**: For data fetching and caching.
+- **Ant Design**: A UI library for React.
+- **Chart.js**: A library for creating charts.
+- **Moment.js**: A library for parsing, validating, manipulating, and formatting dates.
+- **RapidAPI**: For fetching cryptocurrency and news data.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## File Structure
 
-### `npm test`
+### `Navbar.jsx`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Purpose**: Implements a responsive navigation bar.
+- **Key Features**:
+  - Uses Ant Design components like `Menu`, `Typography`, `Avatar`, and `Button`.
+  - Responsive design that adapts to screen size changes.
+  - Toggles menu visibility based on screen size.
 
-### `npm run build`
+### `Cryptocurrencies.jsx`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Purpose**: Displays a list of cryptocurrencies.
+- **Key Features**:
+  - Fetches cryptocurrency data using `useGetCryptosQuery` from `cryptoApi`.
+  - Implements a search functionality to filter cryptocurrencies.
+  - Uses Ant Design components like `Card`, `Row`, `Col`, and `Input`.
+  - Displays cryptocurrency details like price, market cap, and daily change.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `store.js`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Purpose**: Configures the Redux store.
+- **Key Features**:
+  - Integrates `cryptoApi` and `cryptoNewsApi` reducers and middleware.
+  - Uses `configureStore` from Redux Toolkit.
 
-### `npm run eject`
+### `cryptoApi.js`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Purpose**: Defines API endpoints for fetching cryptocurrency data.
+- **Key Features**:
+  - Uses `createApi` and `fetchBaseQuery` from Redux Toolkit Query.
+  - Defines endpoints for fetching cryptocurrencies, cryptocurrency details, historical data, and exchange data.
+  - Utilizes RapidAPI for data fetching.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `cryptoNewsApi.js`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Purpose**: Defines API endpoints for fetching cryptocurrency news.
+- **Key Features**:
+  - Uses `createApi` and `fetchBaseQuery` from Redux Toolkit Query.
+  - Defines an endpoint for fetching cryptocurrency news.
+  - Utilizes RapidAPI for data fetching.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### `News.jsx`
 
-## Learn More
+- **Purpose**: Displays the latest news related to cryptocurrencies.
+- **Key Features**:
+  - Fetches news data using `useGetCryptoNewsQuery` from `cryptoNewsApi`.
+  - Allows users to filter news by cryptocurrency.
+  - Uses Ant Design components like `Select`, `Typography`, `Row`, `Avatar`, `Card`, and `Col`.
+  - Formats dates using Moment.js.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Installation
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. **Clone the repository**:
 
-### Code Splitting
+   ```sh
+   git clone https://github.com/your-username/cryptoradar.git
+   cd cryptoradar
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. **Install dependencies**:
 
-### Analyzing the Bundle Size
+   ```sh
+   npm install
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. **Start the development server**:
+   ```sh
+   npm start
+   ```
 
-### Making a Progressive Web App
+## Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- **Navigate**: Use the navigation bar to switch between different sections like Home, Cryptocurrencies, Exchanges, and News.
+- **Search**: Use the search bar in the Cryptocurrencies section to find specific cryptocurrencies.
+- **ViewDetails**: Click on cryptocurrency card to view detailed information.
+- **Filter News**: Use the dropdown in the News section to filter news by cryptocurrency.
 
-### Advanced Configuration
+## API Integration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+**Cryptocurrency API**
 
-### Deployment
+**Base URL**: https://coinranking1.p.rapidapi.com
+**Endpoints**:
+/coins?limit={count}: Fetches a list of cryptocurrencies.
+/coin/{coinId}: Fetches details of a specific cryptocurrency.
+/coin/{coinId}/history?timePeriod={timePeriod}: Fetches historical data of a cryptocurrency.
+/exchanges: Fetches exchange data.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+**News API**
 
-### `npm run build` fails to minify
+**Base URL**: https://google-news22.p.rapidapi.com
+**Endpoints**:
+/v1/search?q={newsCategory}&country=us&language=en: Fetches news articles based on the category.
+Contributing
+Fork the repository.
+Create a new branch:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## License
+
+This project is licensed under the MIT License.
+
+## Acknowledgements
+
+**RapidAPI**: For providing the cryptocurrency and news APIs.
+**Ant Design**: For the UI components.
+**Redux Toolkit**: For state management and data fetching.
+**Chart.js**: For the charting library.
+**Moment.js**: For date manipulation.
