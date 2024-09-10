@@ -4,8 +4,11 @@ const cryptoApiHeaders = {
     'x-rapidapi-host': 'coinranking1.p.rapidapi.com',
     'x-rapidapi-key': '90dfd14556mshc25bd0c893e047dp1b8724jsn1d00d0c7e052'
 }
-
 const baseUrl = 'https://coinranking1.p.rapidapi.com';
+// const baseUrl = 'https://api.coinranking.com';
+
+
+
 
 
 // utility function adding url and headers
@@ -24,10 +27,9 @@ export const cryptoApi = createApi({
         }),
         getCryptoHistory: builder.query({
             // query: ({ coinId, timePeriod }) => createRequest(`/coin/${coinId}/history/${timePeriod}`)
-            query: ({ coinId, timePeriod }) => createRequest(`/coin/${coinId}/history?timeperiod=${timePeriod}`)
+            query: ({ coinId, timePeriod }) => createRequest(`/coin/${coinId}/history?timePeriod=${timePeriod}`)
         }),
         getExchangeData: builder.query({
-            // query: ({ coinId, timePeriod }) => createRequest(`/coin/${coinId}/history/${timePeriod}`)
             query: () => createRequest('/exchanges')
         })
     })

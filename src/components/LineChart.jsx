@@ -9,7 +9,11 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
   const coinPrice = [];
   const coinTimestamp = [];
 
-  // Process the data in reverse order to display from past to present
+  const timestamp = 1699315200;
+  let date = new Date(timestamp * 1000)
+  console.log(`"Date stamp: "${date.toLocaleString()}`);
+
+
   for (let i = coinHistory?.data?.history?.length - 1; i >= 0; i--) {
     coinPrice.push(coinHistory?.data?.history[i].price);
     coinTimestamp.push(new Date(coinHistory?.data?.history[i].timestamp * 1000).toLocaleDateString());
@@ -41,7 +45,7 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
   return (
     <>
       <Row className='chart-header'>
-        <Title className='chart-title' level={2}>
+        <Title className='chart-tile' level={2}>
           {coinName} Price Chart
         </Title>
         <Col className='price-container'>
