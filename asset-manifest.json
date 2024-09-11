@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/cryptoRadar.v1/static/css/main.54d1be13.css",
-    "main.js": "/cryptoRadar.v1/static/js/main.0af00673.js",
+    "main.js": "/cryptoRadar.v1/static/js/main.30813d59.js",
     "static/media/logo-dark.png": "/cryptoRadar.v1/static/media/logo-dark.cb07a924bb1abe4f762a.png",
     "index.html": "/cryptoRadar.v1/index.html",
     "main.54d1be13.css.map": "/cryptoRadar.v1/static/css/main.54d1be13.css.map",
-    "main.0af00673.js.map": "/cryptoRadar.v1/static/js/main.0af00673.js.map"
+    "main.30813d59.js.map": "/cryptoRadar.v1/static/js/main.30813d59.js.map"
   },
   "entrypoints": [
     "static/css/main.54d1be13.css",
-    "static/js/main.0af00673.js"
+    "static/js/main.30813d59.js"
   ]
 }
